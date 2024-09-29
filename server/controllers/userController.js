@@ -60,3 +60,7 @@ exports.generateAccessToken = catchAsyncErrors(async (req, res, next) => {
         ),
     }).status(200);
 });
+
+exports.hello = catchAsyncErrors(async (req, res, next) => {
+    res.json({message: "hello"})
+});
