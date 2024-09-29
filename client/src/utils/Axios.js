@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const Axios = axios.create({
-    baseURL: 'https://mern-assignment-theta.vercel.app/api', // Set your API base URL here
+    baseURL: 'https://mern-assignment-api.vercel.app/api', // Set your API base URL here
     withCredentials: true
 });
 
@@ -14,7 +14,7 @@ Axios.interceptors.response.use(
             originalRequest._retry = true;
 
             try {
-                const res = await axios.get('https://mern-assignment-theta.vercel.app/api/access-token', {
+                const res = await axios.get('https://mern-assignment-api.vercel.app/api/access-token', {
                     withCredentials: true
                 });
                 api.defaults.headers.common['Authorization'] = `Bearer ${response.data.accessToken}`;

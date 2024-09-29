@@ -23,7 +23,7 @@ export const AuthProvider = ({ children }) => {
         };
 
         if (!user) checkAuthentication();
-    }, [navigate]);
+    }, []);
 
     // Signup function
     const signup = async (userData) => {
