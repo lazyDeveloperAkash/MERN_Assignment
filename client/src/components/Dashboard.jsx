@@ -1,9 +1,15 @@
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/UserContext';
+import { useEffect } from 'react';
 
 const Dashboard = () => {
   const { user, signout, loading } = useAuth();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if(user) navigate("/login");
+  }, [])
+  
 
   const handleLogout = async () => {
     await signout();

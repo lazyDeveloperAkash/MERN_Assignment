@@ -17,9 +17,8 @@ export const AuthProvider = ({ children }) => {
                 const {data} = await Axios.get('/');
                 setUser(data.user); 
             } catch (error) {
-                toast.warn(error    .response?.data?.message || 'please login');
+                toast.warn(error.response?.data?.message || 'please login');
                 setUser(null);
-                navigate('/login');
             }
         };
 
