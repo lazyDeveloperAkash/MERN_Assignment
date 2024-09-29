@@ -40,15 +40,23 @@ exports.signout = catchAsyncErrors(async (req, res, next) => {
 
 exports.generateAccessToken = catchAsyncErrors(async (req, res, next) => {
     const { refreshToken } = req.cookies;
-    if (!refreshToken) return next(new ErrorHandler("please login to access the resorce", 401));
+    if (!refreshToken) return next(new ErrorHandler("Please login to access the resource", 401));
 
-    const { err, id } = JWT.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET);
-    if (err) return next(new ErrorHandler("invalid refresh token!", 403));
+    const { id } = JWT.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET);
+    if (!id) return next(new ErrorHandler("invalid refresh token", 401));
 
-    //genarate and set new access token
-    const newAccessToken = JWT.sign(id, process.env.ACCESS_TOKEN_SECRET, {
-        maxAge: 10 * 60 * 1000
-    });
+    const newAccessToken = JWT.sign(
+        { id: id },
+        process.env.ACCESS_TOKEN_SECRET,
+        { expiresIn: process.env.ACCESS_TOKEN_EXPIRE }
+    );
 
-    return res.status(200).cookies("accessToken", newAccessToken);
-})
+    res.cookie('accessToken', newAccessToken, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'Strict',
+        expires: new Date(
+            Date.now() + +process.env.ACCESS_TOKEN_EXPIRE.substring(0,2) * 60 * 1000
+        ),
+    }).status(200);
+});
