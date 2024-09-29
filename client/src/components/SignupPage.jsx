@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { useAuth } from '../context/UserContext';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import Loader from './Loader';
 
 const SignupPage = () => {
-  const { signup } = useAuth();
+  const { signup,loading } = useAuth();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     userName: '',
@@ -134,8 +135,17 @@ const SignupPage = () => {
           >
             Sign Up
           </button>
+          <div className="mt-4">
+          <p className="text-center text-sm text-gray-600">
+            already an user?{' '}
+            <Link to="/signin" className="text-blue-500 hover:underline">
+              Sign in
+            </Link>
+          </p>
+        </div>
         </form>
       </div>
+      {loading ? <Loader /> : ""}
     </div>
   );
 };

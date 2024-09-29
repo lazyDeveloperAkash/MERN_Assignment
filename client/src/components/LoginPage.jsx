@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/UserContext';
 import { useNavigate, Link } from 'react-router-dom';
+import Loader from './Loader';
 
 const LoginPage = () => {
-  const { login, error, loading } = useAuth();
+  const { login, loading } = useAuth();
   const [userData, setUserData] = useState({ email: '', password: '' });
   const navigate = useNavigate();
 
@@ -35,7 +36,7 @@ const LoginPage = () => {
             type="email"
             name="email"
             id="email"
-            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+            className="mt-1 block w-full  rounded-md shadow-sm p-2 sm:text-sm"
             value={userData.email}
             onChange={handleChange}
           />
@@ -50,16 +51,12 @@ const LoginPage = () => {
             type="password"
             name="password"
             id="password"
-            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+            className="mt-1 block p-2 w-full rounded-md shadow-sm   sm:text-sm"
             value={userData.password}
             onChange={handleChange}
           />
         </div>
 
-        {/* Error Message */}
-        {error && <p className="text-red-500 text-sm">{error}</p>}
-
-        {/* Login Button */}
         <button
           type="submit"
           disabled={loading}
@@ -78,6 +75,7 @@ const LoginPage = () => {
           </p>
         </div>
       </form>
+      {loading ? <Loader /> : ""}
     </div>
   );
 };

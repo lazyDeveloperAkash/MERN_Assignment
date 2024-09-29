@@ -26,6 +26,7 @@ const Dashboard = () => {
           </button>
         </div>
       </div>
+      {loading ? <Loader /> : ""}
     </div>
   );
 };
