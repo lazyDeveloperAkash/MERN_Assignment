@@ -2,7 +2,7 @@
   "name": "server",
   "version": "1.0.0",
   "description": "backentApi",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
     "test": "npx nodemon"
   },
