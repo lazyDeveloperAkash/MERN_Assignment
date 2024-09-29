@@ -28,8 +28,8 @@ app.use(cookieParser());
 app.use("/api", require("./routes/userRoute.js"));
 
 //error handler
-const ErrorHandler = require("./utils/ErrorHandler");
-const { generatedeErrors } = require("./middlewares/error");
+const ErrorHandler = require("./utils/ErrorHandler.js");
+const { generatedeErrors } = require("./middlewares/error.js");
 app.all("*", (req, res, next) => {
     next(new ErrorHandler(`requist url not found ${req.url}`, 404));
 });
