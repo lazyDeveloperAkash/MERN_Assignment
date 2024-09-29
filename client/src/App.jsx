@@ -13,7 +13,7 @@ const App = () => {
     <div>
       <ToastContainer position='bottom-left' autoClose={3000}/>
         <Routes>
-          <Route path="/signup" element={user ? <Navigate to="/dashboard" /> : <SignupPage />} />
+          <Route path="/" element={user ? <Navigate to="/dashboard" /> : <SignupPage />} />
           <Route path="/login" element={user ? <Navigate to="/dashboard" /> : <LoginPage />} />
           <Route path="/dashboard" element={user ? <Dashboard /> : <Navigate to="/login" />} />
         </Routes>
