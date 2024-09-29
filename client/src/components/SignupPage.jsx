@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/UserContext';
-import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import { Link, useNavigate } from 'react-router-dom';
 import Loader from './Loader';
 
 const SignupPage = () => {
